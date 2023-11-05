@@ -7,6 +7,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import RequireAuth from "./Pages/Website/Auth/RequireAuth/RequireAuth";
+import PersistLogin from "./Pages/Website/Auth/Login/PersistLogin";
 // import SignUpPage from './Pages/Website/Auth/SignUp/SignUpPage'
 
 function App() {
@@ -17,8 +18,10 @@ function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignUpPage />}></Route>
         {/* Protected Routes */}
-        <Route element={<RequireAuth />}>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="/dashboard" element={<Dashboard />}></Route>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

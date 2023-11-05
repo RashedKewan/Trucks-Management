@@ -1,17 +1,23 @@
 // import axios from "../../../../Lib/axios";
-import axios from "axios";
+import axios from "../../../../Lib/axios";
 import React, { useContext, useEffect, useState } from "react";
 import UserLogin from "../../../../Models/User/UserLogin";
 import Input from "../../../../Components/Input";
 import { User } from "../../Context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 const LoginForm = () => {
   // Consts
   const userContext = useContext(User);
   const [accept, setAccept] = useState(false);
   const [user, setUser] = useState(new UserLogin("", ""));
-  const nav = useNavigate();
+  const [isUnauthorized, setIsUnauthorized] = useState(false);
+  const LOGIN_URL = "/api/v1/auth/authenticate";
+  const navigateTo = useNavigate();
 
+  // cookie
+  const cookie = new Cookies();
+  
   // Functions
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,23 +35,26 @@ const LoginForm = () => {
     }
 
     try {
-      let res = await axios.post(
-        "http://localhost:8081/api/v1/auth/authenticate",
-        user
-      );
+      let res = await axios.post(LOGIN_URL, user);
 
       console.log(res.data);
-
       const access_token = res.data.access_token;
       const refresh_token = res.data.refresh_token;
       const userDetails = res.data.userDetails;
+      cookie.set("Bearer", access_token);
       userContext.setAuth({
         access_token,
         refresh_token,
         userDetails,
       });
-      nav("/dashboard");
+      navigateTo("/dashboard");
     } catch (err) {
+      if (
+        err.response.status === 403 || // Forbidden
+        err.response.status === 401 // Unauthorized
+      ) {
+        setIsUnauthorized(true);
+      }
       setAccept(true);
     }
   }
@@ -54,6 +63,9 @@ const LoginForm = () => {
     <div className="parent">
       <div className="register">
         <form onSubmit={Submit}>
+          {accept && isUnauthorized === true && (
+            <p className="error-credentials">Wrong Credentials</p>
+          )}
           <Input
             label="Username"
             name="username"
@@ -80,6 +92,7 @@ const LoginForm = () => {
               Login
             </button>
           </div>
+
           <p className="text-end mt-2">
             Forgot <a href="/">Password? </a>
             <Link to="/signup">Signup</Link>

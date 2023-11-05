@@ -1,30 +1,25 @@
-.form_container{
+.form_container {
   width: 30%;
-
 }
 
-.bckg-design{
+.bckg-design {
   background-image: url("https://img.freepik.com/premium-photo/transportation-logistics-businessman-handshake-global-network-logistics-partnership_34200-451.jpg?size=626&ext=jpg&uid=R120943434&ga=GA1.1.792157186.1697461773&semt=ais");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 
 @media screen and (max-width: 1000px) {
-  .form_container{
+  .form_container {
     width: 45%;
   }
-  
-} 
-  
+}
+
 @media screen and (max-width: 700px) {
-  .form_container{
+  .form_container {
     width: 65%;
   }
-  
-} 
-  
+}
 
 body {
   font-family: "Cairo", sans-serif;
@@ -45,7 +40,7 @@ form {
   width: 400px;
   box-shadow: 0px 2px 15px rgba(87, 152, 238, 0.5);
   padding: 20px;
-  background-color:white;
+  background-color: white;
   border-radius: 15px;
 }
 input {
@@ -93,5 +88,49 @@ input::placeholder {
   font-size: 12px;
   color: red;
   margin-left: 10px;
+  font-weight: bold;
   margin-top: 0px;
+}
+
+.error-credentials {
+  position: relative;
+  font-size: 12px;
+  color: white;
+  background-color: red;
+  margin-left: 10px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 0;
+
+  /* Add a triangle using a pseudo-element */
+  &::before {
+    content: "";
+    position: absolute;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+    top: -20px;
+    left: 10px;
+  }
+}
+
+/* style for loading page */
+.spinner-container {
+  margin: 0 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-radius: 4px solid #7e7c7c;
+  border-top: 4px solid white;
+  animation: rotating-spinner is linear infinite;
+}
+
+@keyframes rotating-spinner {
+  form {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

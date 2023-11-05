@@ -1,14 +1,7 @@
-// import axios from 'axios';
-
-
-// export const getAuthToken = () => {
-//     return window.localStorage.getItem('auth_token');
-// };
-
-// export const setAuthHeader = (token) => {
-//     window.localStorage.setItem('auth_token', token);
-// };
-
+import axios from "axios";
+export default axios.create({
+  baseURL: "http://localhost:8081",
+});
 // axios.defaults.baseURL = 'http://localhost:8081';
 // axios.defaults.headers.post['Content-Type'] = 'application/json';
 

@@ -1,5 +1,5 @@
 // import axios from "../../../../Lib/axios";
-import axios from "axios";
+import axios from "../../../../Lib/axios";
 import React, { useContext, useState } from "react";
 import UserSignUp from "../../../../Models/User/UserSignUp";
 import { UserRole } from "../../../../Models/User/UserRole";
@@ -7,15 +7,23 @@ import Input from "../../../../Components/Input";
 import { isSignUpFormDataValid } from "./SignUpFormValidation";
 import { Link, useNavigate } from "react-router-dom";
 import { User } from "../../Context/UserContext";
+import Cookies from "universal-cookie";
 
 const SignUpForm = () => {
   const userContext = useContext(User);
   const [accept, setAccept] = useState(false);
-  const [passwordRepeat, setPasswordRepeat] = useState("");
+  const [confirmedPassword, setConfirmedPassword] = useState("");
   const [user, setUser] = useState(
     new UserSignUp("", "", "", "", "", "", "", UserRole.USER)
   );
-  const nav = useNavigate();
+  const navigateTo = useNavigate();
+  const REGISTER_URL = "/api/v1/auth/register";
+
+  
+  // cookie
+  const cookie = new Cookies();
+
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUser((prevUser) => ({
@@ -28,27 +36,28 @@ const SignUpForm = () => {
     event.preventDefault();
     setAccept(true);
 
-    if (!isSignUpFormDataValid(user, passwordRepeat)) {
+    if (!isSignUpFormDataValid(user, confirmedPassword)) {
       return;
     }
 
     try {
       let res = await axios.post(
-        "http://localhost:8081/api/v1/auth/register",
+        REGISTER_URL,
         user
       );
 
       console.log(res.data);
 
-      const token = res.data.access_token;
+      const access_token = res.data.access_token;
       const refresh_token = res.data.refresh_token;
       const userDetails = res.data.userDetails;
+      cookie.set("Bearer", access_token);
       userContext.setAuth({
-        token,
+        access_token,
         refresh_token,
         userDetails,
       });
-      nav("/dashboard");
+      navigateTo("/dashboard");
     } catch (err) {
       setAccept(true);
     }
@@ -135,23 +144,25 @@ const SignUpForm = () => {
           />
 
           <Input
-            label="Repeat Password"
-            name="repeatPassword"
+            label="Confirm Password"
+            name="confirmPassword"
             type="password"
-            placeholder="Repeat Password..."
-            value={passwordRepeat}
-            onChange={(e) => setPasswordRepeat(e.target.value)}
-            condition={passwordRepeat !== user.password && accept}
+            placeholder="Confirm Password..."
+            value={confirmedPassword}
+            onChange={(e) => setConfirmedPassword(e.target.value)}
+            condition={confirmedPassword !== user.password && accept}
             requiredError="Repeat Password is required"
           />
           <div className="d-grid" style={{ textAlign: "center" }}>
-            <button type="submit" className="btn btn-primary btn-block mb-3">
+            <button  type="submit" className="btn btn-primary btn-block mb-3">
               Sign up
             </button>
-            <p className="text-end">
-              Forgot <a href="/">Password? </a>
-              <Link to="/login">Login</Link>
-            </p>
+            <div>
+              <p>
+                Already registered?{" "}  
+                <Link to="/login">Sign In</Link>
+              </p>
+            </div>
           </div>
         </form>
       </div>

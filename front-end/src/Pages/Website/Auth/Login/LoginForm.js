@@ -1,6 +1,6 @@
 // import axios from "../../../../Lib/axios";
 import axios from "../../../../Lib/axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext,  useState } from "react";
 import UserLogin from "../../../../Models/User/UserLogin";
 import Input from "../../../../Components/Input";
 import { User } from "../../Context/UserContext";
@@ -47,7 +47,7 @@ const LoginForm = () => {
         refresh_token,
         userDetails,
       });
-      navigateTo("/dashboard");
+      navigateTo("/");
     } catch (err) {
       if (
         err.response.status === 403 || // Forbidden
@@ -95,7 +95,7 @@ const LoginForm = () => {
 
           <p className="text-end mt-2">
             Forgot <a href="/">Password? </a>
-            <Link to="/signup">Signup</Link>
+            <Link to="/register">Signup</Link>
           </p>
         </form>
       </div>

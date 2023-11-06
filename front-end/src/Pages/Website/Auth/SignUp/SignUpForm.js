@@ -57,7 +57,7 @@ const SignUpForm = () => {
         refresh_token,
         userDetails,
       });
-      navigateTo("/dashboard");
+      navigateTo("/");
     } catch (err) {
       setAccept(true);
     }

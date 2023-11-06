@@ -1,0 +1,29 @@
+section {
+  background: linear-gradient(to right, #e52d27, #b31217);
+  color: white;
+}
+
+h1 {
+  text-shadow: 2px 2px #8b0000;
+}
+
+h1 {
+  animation: shake 0.5s infinite;
+}
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

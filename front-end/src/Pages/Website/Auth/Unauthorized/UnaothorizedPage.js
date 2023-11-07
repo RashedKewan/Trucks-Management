@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 // import UnauthorizedSVG from './Unauthorized.svg';
-import "./style.css";
+import "./UnauthorizedStyle.css";
 const UnaothorizedPage = () => {
     const navigateTo = useNavigate();
     const prevPage = -1;

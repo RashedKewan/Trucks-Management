@@ -35,14 +35,14 @@ body {
   margin-bottom: 30px;
 }
 
-/* form {
+form {
   height: 100%;
   width: 400px;
   box-shadow: 0px 2px 15px rgba(87, 152, 238, 0.5);
   padding: 20px;
   background-color: white;
   border-radius: 15px;
-} */
+}
 input {
   padding: 10px 20px;
   width: 100%;
@@ -67,7 +67,7 @@ input::placeholder {
   align-items: center;
   margin-top: 40px;
 }
-.register button {
+/* .register button {
   outline: none;
   border: none;
   background-color: #86b7fe;
@@ -78,12 +78,22 @@ input::placeholder {
   transition: 0.3s;
   border: 2px solid white;
   font-weight: bold;
-}
+} */
 /* .register button:hover {
   background-color: white;
   border: 2px solid;
   color: #86b7fe;
 } */
+.register button:enabled {
+  background-color: 86b7fe;
+  border: 2px solid;
+  color: white;
+}
+.register button:disabled {
+  background-color: white;
+  border: 2px solid;
+  color: #86b7fe;
+}
 .error {
   font-size: 12px;
   color: red;
@@ -115,3 +125,111 @@ input::placeholder {
   }
 }
 
+/*  newwwwwwwwww  */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+/* 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+/* 
+html {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    color: #fff;
+} */
+
+/* body {
+    min-height: 100vh;
+    background-color: dodgerblue;
+} */
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem 0.5rem;
+}
+
+/* form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding-bottom: 1rem;
+} */
+
+section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content:  flex-start;
+}
+
+/* a,
+a:visited {
+  color: #000;
+} */
+
+label,
+button {
+  margin-top: 1rem;
+}
+
+
+
+.instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #c24747;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  /* bottom: -5px; */
+}
+
+.instructions > svg {
+  margin-right: 0.25rem;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.hide {
+  display: none;
+}
+
+.valid {
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+
+.invalid {
+  color: red;
+  margin-left: 0.25rem;
+}
+
+.errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.line {
+  display: inline-block;
+}
+
+.flexGrow {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}

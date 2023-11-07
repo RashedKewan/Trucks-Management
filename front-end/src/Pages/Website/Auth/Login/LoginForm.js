@@ -1,12 +1,19 @@
 // import axios from "../../../../Lib/axios";
 import axios from "../../../../Lib/axios";
-import React, { useContext,  useState } from "react";
+import React, { useContext, useState } from "react";
 import UserLogin from "../../../../Models/User/UserLogin";
 import Input from "../../../../Components/Input";
 import { User } from "../../Context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import "../style.css";
+import useInput from "../../../../Hooks/useFormInput";
+import { PWD_REGEX, USER_REGEX } from "../SignUp/Consts";
+import InputField from "../../../../Components/InputField";
 const LoginForm = () => {
+  const username = useInput("", USER_REGEX);
+  const password = useInput("", PWD_REGEX);
+
   // Consts
   const userContext = useContext(User);
   const [accept, setAccept] = useState(false);
@@ -17,7 +24,7 @@ const LoginForm = () => {
 
   // cookie
   const cookie = new Cookies();
-  
+
   // Functions
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -66,37 +73,43 @@ const LoginForm = () => {
           {accept && isUnauthorized === true && (
             <p className="error-credentials">Wrong Credentials</p>
           )}
-          <Input
-            label="Username"
-            name="username"
-            type="text"
-            placeholder="Username..."
-            value={user.username}
-            onChange={handleChange}
-            condition={user.username === "" && accept}
-            requiredError="Username is required"
-          />
+          <section>
+            <InputField
+              type="text"
+              label="Username"
+              value={username.value}
+              onChange={username.handleChange}
+              valid={username.valid}
+              focus={username.handleFocus}
+              blur={username.handleBlur}
+              placeholder="Choose a unique username"
+              instruction="Username is required"
+            />
+            <InputField
+              type="password"
+              label="Password"
+              value={password.value}
+              onChange={password.handleChange}
+              valid={password.valid}
+              focus={password.handleFocus}
+              blur={password.handleBlur}
+              placeholder="Create a strong password"
+              instruction="Username is required"
+            />
 
-          <Input
-            label="Password"
-            name="password"
-            type="password"
-            placeholder="Password..."
-            value={user.password}
-            onChange={handleChange}
-            condition={user.password.length < 8 && accept}
-            requiredError="Password is required"
-          />
-          <div className="d-grid" style={{ textAlign: "center" }}>
-            <button type="submit" className="btn btn-primary btn-block mb-3">
+            <button
+              type="submit"
+              className="mt-4"
+              disabled={!username.valid || !password.valid ? true : false}
+            >
               Login
             </button>
-          </div>
 
-          <p className="text-end mt-2">
-            Forgot <a href="/">Password? </a>
-            <Link to="/register">Signup</Link>
-          </p>
+            <p className="mt-2">
+              Forgot <a href="/">Password? </a>
+              <Link to="/register">Signup</Link>
+            </p>
+          </section>
         </form>
       </div>
     </div>

@@ -8,9 +8,16 @@ import { UserRole } from "../../../../Models/User/UserRole";
 import { User } from "../../Context/UserContext";
 import UserSignUp from "../../../../Models/User/UserSignUp";
 import Cookies from "universal-cookie";
-import { CITY_REGEX, COMPANY_NAME_REGEX, EMAIL_REGEX, NAME_REGEX, PWD_REGEX, REGISTER_URL, USER_REGEX, instructionMessages } from "./Consts";
-
-
+import {
+  CITY_REGEX,
+  COMPANY_NAME_REGEX,
+  EMAIL_REGEX,
+  NAME_REGEX,
+  PWD_REGEX,
+  REGISTER_URL,
+  USER_REGEX,
+  instructionMessages,
+} from "./Consts";
 
 const Register = () => {
   /**************************** CONSTS *******************************/
@@ -58,13 +65,13 @@ const Register = () => {
 
     try {
       let user = new UserSignUp(
-        firstname,
-        lastname,
-        username,
-        email,
-        password,
-        company,
-        city,
+        firstname.value,
+        lastname.value,
+        username.value,
+        email.value,
+        password.value,
+        company.value,
+        city.value,
         UserRole.USER
       );
       const response = await axios.post(REGISTER_URL, user);
@@ -102,7 +109,7 @@ const Register = () => {
             <section>
               <h1>Success!</h1>
               <p>
-                <a href="#">Sign In</a>
+                <a href="/">Sign In</a>
               </p>
             </section>
           ) : (
@@ -145,7 +152,7 @@ const Register = () => {
                 valid={username.valid}
                 focus={username.handleFocus}
                 blur={username.handleBlur}
-                placeholder="Choose a unique username"  
+                placeholder="Choose a unique username"
                 instruction={instructionMessages.username}
               />
               <InputField
@@ -203,7 +210,8 @@ const Register = () => {
                 placeholder="Re-enter your password"
                 instruction={instructionMessages.confirmPassword}
               />
-              <button className="mt-4"
+              <button
+                className="mt-4"
                 disabled={
                   !firstname.valid ||
                   !lastname.valid ||
@@ -224,7 +232,7 @@ const Register = () => {
               <p className="m-2">
                 Already registered?{" "}
                 <span className="line">
-                  <Link to="/">Sign In</Link>
+                  <Link to="/login">Sign In</Link>
                 </span>
               </p>
             </section>

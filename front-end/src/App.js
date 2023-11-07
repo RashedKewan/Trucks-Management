@@ -11,7 +11,6 @@ import PageNotFound from "./Pages/Website/Auth/Missing/PageNotFound";
 import UnauthorizedPage from "./Pages/Website/Auth/Unauthorized/UnaothorizedPage";
 import { UserRole } from "./Models/User/UserRole";
 import Layout from "./Pages/Website/Layout/Layout";
-import Register from "./Pages/Website/Auth/SignUp/Register";
 
 function App() {
   return (

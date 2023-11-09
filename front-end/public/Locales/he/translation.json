@@ -1,0 +1,32 @@
+{
+    "language": "שפה",
+    "Login": "התחבר",
+    "Register": "הרשמה",
+    "Sign_Up": "הרשם",
+    "Sign_In": "התחבר",
+
+    "Firstname": "שם פרטי",
+    "Lastname": "שם משפחה",
+    "City": "עיר",
+    "Company": "חברה",
+
+    "Username": "שם משתמש",
+    "Email": "אימייל",
+    "Password": "סיסמה",
+    "Confirm_Password": "אשר סיסמה",
+    "Forgot": "שכחת",
+    "Already_Registered": "כבר רשום",
+    "Back_to_Home": "חזרה לדף הבית",
+
+    "instructionMessages.Invalid_Username":"הוזן שם משתמש לא תקין",
+    "instructionMessages.Invalid_Password":"הסיסמה לא חוקית",
+
+    "instructionMessages.username": "יש להיות באורך של 3 עד 23 תווים. תווים מורשים: אותיות (אנגלית) , מספרים, קו תחתון ומקפים.",
+    "instructionMessages.password": "חייב להיות באורך של 8 עד 24 תווים. תווים מורשים: אותיות (אנגלית): יש לכלול לפחות אות קטנה, אות גדולה, ספרה (0-9) ותו מיוחד (!, @, #, $ או %).",
+    "instructionMessages.firstname": "יש להיות באורך של 3 עד 23 תווים. תווים מורשים: אותיות.",
+    "instructionMessages.lastname": "יש להיות באורך של 3 עד 23 תווים. תווים מורשים: אותיות.",
+    "instructionMessages.email": "חייב להיות בפורמט 'name@example.com'. תווים מורשים: אותיות (אנגלית: גדולות או קטנות), מספרים, נקודות, קו תחתון ומקפים. חלק הדומיין חייב לכלול לפחות נקודה אחת ולהסתיים עם 2 עד 4 תווים אלפביתיים (לדוגמה, '.com', '.org', '.io').",
+    "instructionMessages.company": "תווים מורשים: אותיות, מספרים, רווחים, נקודות, פסיקים, מקפים וגרשים. שם החברה יכול לכלול תווים מיוחדים כמו פסיקים ונקודות.",
+    "instructionMessages.city": "תווים מורשים: אותיות (גדולות או קטנות), רווחים, מקפים וגרשים. שמות הערים יכולים לכלול רווחים ותווים פיסוק נפוצים.",
+    "instructionMessages.confirmPassword": "חייב להתאים לשדה קלט סיסמה הראשון."
+}

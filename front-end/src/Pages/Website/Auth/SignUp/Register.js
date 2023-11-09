@@ -1,13 +1,14 @@
-import { useState, useRef, useContext } from "react";
-import axios from "../../../../Lib/axios";
-import { Link, useNavigate } from "react-router-dom";
-import "../style.css";
-import useInput from "../../../../Hooks/useFormInput";
-import InputField from "../../../../Components/InputField";
 import { UserRole } from "../../../../Models/User/UserRole";
-import { User } from "../../Context/UserContext";
 import UserSignUp from "../../../../Models/User/UserSignUp";
+import InputField from "../../../../Components/InputField";
+import useInput from "../../../../Hooks/useFormInput";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useRef, useContext } from "react";
+import { User } from "../../Context/UserContext";
+import axios from "../../../../Lib/axios";
 import Cookies from "universal-cookie";
+import "../style.css";
+import { useTranslation } from "react-i18next";
 import {
   CITY_REGEX,
   COMPANY_NAME_REGEX,
@@ -15,8 +16,7 @@ import {
   NAME_REGEX,
   PWD_REGEX,
   REGISTER_URL,
-  USER_REGEX,
-  instructionMessages,
+  USER_REGEX
 } from "./Consts";
 
 const Register = () => {
@@ -29,7 +29,8 @@ const Register = () => {
   const company = useInput("", COMPANY_NAME_REGEX);
   const city = useInput("", CITY_REGEX);
   const confirmPassword = useInput("", PWD_REGEX);
-
+  
+  const { t } = useTranslation();
   const errRef = useRef();
 
   const [success, setSuccess] = useState(false);
@@ -43,6 +44,20 @@ const Register = () => {
 
   // Get Navigator
   const navigateTo = useNavigate();
+
+
+  
+  const instructionMessages = {
+    username: t("instructionMessages.username"),
+    password: t("instructionMessages.password"),
+    firstname: t("instructionMessages.firstname"),
+    lastname: t("instructionMessages.lastname"),
+    email: t("instructionMessages.email"),
+    company: t("instructionMessages.company"),
+    city: t("instructionMessages.city"),
+    confirmPassword: t("instructionMessages.confirmPassword"),
+  };
+
 
   /**************************** FUNCTIONS *******************************/
   const handleSubmit = async (e) => {
@@ -107,7 +122,7 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
           {success ? (
             <section>
-              <h1>Success!</h1>
+              <h1>{t("Register")}</h1>
               <p>
                 <a href="/">Sign In</a>
               </p>
@@ -121,10 +136,10 @@ const Register = () => {
               >
                 {errMsg}
               </p>
-              <h1>Register</h1>
+              <h1>{t("Register")}</h1>
               <InputField
                 type="text"
-                label="Firstname"
+                label={t("Firstname")}
                 value={firstname.value}
                 onChange={firstname.handleChange}
                 valid={firstname.valid}
@@ -135,7 +150,7 @@ const Register = () => {
               />
               <InputField
                 type="text"
-                label="Lastname"
+                label={t("Lastname")}
                 value={lastname.value}
                 onChange={lastname.handleChange}
                 valid={lastname.valid}
@@ -146,7 +161,7 @@ const Register = () => {
               />
               <InputField
                 type="text"
-                label="Username"
+                label={t("Username")}
                 value={username.value}
                 onChange={username.handleChange}
                 valid={username.valid}
@@ -157,7 +172,7 @@ const Register = () => {
               />
               <InputField
                 type="email"
-                label="Email"
+                label={t("Email")}
                 value={email.value}
                 onChange={email.handleChange}
                 valid={email.valid}
@@ -168,7 +183,7 @@ const Register = () => {
               />
               <InputField
                 type="text"
-                label="Company"
+                label={t("Company")}
                 value={company.value}
                 onChange={company.handleChange}
                 valid={company.valid}
@@ -179,7 +194,7 @@ const Register = () => {
               />
               <InputField
                 type="text"
-                label="City"
+                label={t("City")}
                 value={city.value}
                 onChange={city.handleChange}
                 valid={city.valid}
@@ -190,7 +205,7 @@ const Register = () => {
               />
               <InputField
                 type="password"
-                label="Password"
+                label={t("Password")}
                 value={password.value}
                 onChange={password.handleChange}
                 valid={password.valid}
@@ -201,7 +216,7 @@ const Register = () => {
               />
               <InputField
                 type="password"
-                label="Confirm Password"
+                label={t("Confirm_Password")}
                 value={confirmPassword.value}
                 onChange={confirmPassword.handleChange}
                 valid={confirmPassword.valid}
@@ -226,13 +241,13 @@ const Register = () => {
                     : false
                 }
               >
-                Sign Up
+                {t("Sign_Up")}
               </button>
 
               <p className="m-2">
-                Already registered?{" "}
+                {t("Already_Registered")}?{" "}
                 <span className="line">
-                  <Link to="/login">Sign In</Link>
+                  <Link to="/login">{t("Login")}</Link>
                 </span>
               </p>
             </section>

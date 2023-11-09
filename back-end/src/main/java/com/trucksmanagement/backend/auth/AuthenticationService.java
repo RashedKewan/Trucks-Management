@@ -31,16 +31,29 @@ public class AuthenticationService {
 
 	public AuthenticationResponse register(RegisterRequest request) {
 		// check if username exists
-		var user = User.builder().firstname(request.getFirstname()).lastname(request.getLastname())
-				.username(request.getUsername()).email(request.getEmail())
-				.password(passwordEncoder.encode(request.getPassword())).company(request.getCompany())
-				.city(request.getCity()).role(request.getRole()).isActive(true).build();
+		var user =  User.builder()
+						.firstname(request.getFirstname())
+						.lastname(request.getLastname())
+						.username(request.getUsername())
+						.email(request.getEmail())
+						.password(passwordEncoder.encode(request.getPassword()))
+						.company(request.getCompany())
+						.numberOfTrucks(0)
+						.city(request.getCity())
+						.role(request.getRole())
+						.isActive(true)
+						.build();
 
 		var savedUser = repository.save(user);
 		var jwtToken = jwtService.generateToken(user);
 		var refreshToken = jwtService.generateRefreshToken(user);
 		saveUserToken(savedUser, jwtToken);
-		return AuthenticationResponse.builder().user(user).accessToken(jwtToken).refreshToken(refreshToken).build();
+		return AuthenticationResponse
+				.builder()
+				.user(user)
+				.accessToken(jwtToken)
+				.refreshToken(refreshToken)
+				.build();
 	}
 
 	public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -52,11 +65,22 @@ public class AuthenticationService {
 		var refreshToken = jwtService.generateRefreshToken(user);
 		revokeAllUserTokens(user);
 		saveUserToken(user, jwtToken);
-		return AuthenticationResponse.builder().user(user).accessToken(jwtToken).refreshToken(refreshToken).build();
+		return AuthenticationResponse
+				.builder()
+				.user(user)
+				.accessToken(jwtToken)
+				.refreshToken(refreshToken)
+				.build();
 	}
+	
 
 	private void saveUserToken(User user, String jwtToken) {
-		var token = Token.builder().user(user).token(jwtToken).tokenType(TokenType.BEARER).expired(false).revoked(false)
+		var token = Token.builder()
+				.user(user)
+				.token(jwtToken)
+				.tokenType(TokenType.BEARER)
+				.expired(false)
+				.revoked(false)
 				.build();
 		tokenRepository.save(token);
 	}

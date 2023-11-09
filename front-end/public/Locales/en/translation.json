@@ -1,0 +1,34 @@
+{
+    "language": "Language",
+    "Login":"Login",
+    "Register": "Register",
+    "Sign_Up":"Sign Up",
+    "Sign_In":"Sign In",
+
+    "Firstname":"Firstname",
+    "Lastname":"Lastname",
+    "City":"City",
+    "Company":"Company",
+    
+    "Username":"Username",
+    "Email":"Email",
+    "Password":"Password",
+    "Confirm_Password":"Confirm Password",
+    "Forgot":"Forgot",
+    "Already_Registered":"Already Registered",
+    "Back_to_Home": "Back to Home",
+    
+    "instructionMessages.Invalid_Username":"Invalid Username",
+    "instructionMessages.Invalid_Password":"Invalid Password",
+
+    "instructionMessages.username": "Must start with a letter. Should be 3 to 23 characters in length. Allowed characters: letters (uppercase or lowercase), numbers, underscores, and hyphens.",
+    "instructionMessages.password": "Must be 8 to 24 characters in length. Must include at least one lowercase letter, one uppercase letter, one digit (0-9), and one special character (!, @, #, $, or %).",
+    "instructionMessages.firstname": "Should be 3 to 23 characters in length. Allowed characters: letters (uppercase or lowercase) only.",
+    "instructionMessages.lastname": "Should be 3 to 23 characters in length. Allowed characters: letters (uppercase or lowercase) only.",
+    "instructionMessages.email": "Must have the format 'name@example.com'. Allowed characters: letters (uppercase or lowercase), numbers, dots, underscores, and hyphens. The domain part should have at least one dot and end with 2 to 4 alphabetic characters (e.g., '.com', '.org', '.io').",
+    "instructionMessages.company": "Allowed characters: letters (uppercase or lowercase), numbers, spaces, periods, commas, hyphens, and apostrophes. Company name may include special characters such as commas and periods.",
+    "instructionMessages.city": "Allowed characters: letters (uppercase or lowercase), spaces, hyphens, and apostrophes. City names may include spaces and common punctuation characters.",
+    "instructionMessages.confirmPassword": "Must match the first password input field."
+  
+    
+}

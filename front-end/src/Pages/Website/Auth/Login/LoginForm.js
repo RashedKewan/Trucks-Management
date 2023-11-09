@@ -1,31 +1,33 @@
-// import axios from "../../../../Lib/axios";
-import axios from "../../../../Lib/axios";
 import React, { useContext, useRef, useState } from "react";
+import InputField from "../../../../Components/InputField";
 import UserLogin from "../../../../Models/User/UserLogin";
-import { User } from "../../Context/UserContext";
+import { PWD_REGEX, USER_REGEX } from "../SignUp/Consts";
+import useInput from "../../../../Hooks/useFormInput";
 import { Link, useNavigate } from "react-router-dom";
+import { User } from "../../Context/UserContext";
+import { useTranslation } from "react-i18next";
+import axios from "../../../../Lib/axios";
 import Cookies from "universal-cookie";
 import "../style.css";
-import useInput from "../../../../Hooks/useFormInput";
-import { PWD_REGEX, USER_REGEX } from "../SignUp/Consts";
-import InputField from "../../../../Components/InputField";
+
+const LOGIN_URL = "/api/v1/auth/authenticate";
 
 const LoginForm = () => {
+  const [isUnauthorized, setIsUnauthorized] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
   const username = useInput("", USER_REGEX);
   const password = useInput("", PWD_REGEX);
-
-  const errRef = useRef();
-  // const [success, setSuccess] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
-
-  // Consts
   const userContext = useContext(User);
-  const [isUnauthorized, setIsUnauthorized] = useState(false);
-  const LOGIN_URL = "/api/v1/auth/authenticate";
+  const { t } = useTranslation();
   const navigateTo = useNavigate();
-
-  // cookie
   const cookie = new Cookies();
+  const errRef = useRef();
+
+  const instructionMessages = {
+    username: t("instructionMessages.Invalid_Username"),
+    password: t("instructionMessages.Invalid_Password"),
+
+  };
 
   async function Submit(event) {
     event.preventDefault();
@@ -48,6 +50,7 @@ const LoginForm = () => {
         refresh_token,
         userDetails,
       });
+      
       navigateTo("/");
     } catch (err) {
       if (!err?.response) {
@@ -76,41 +79,43 @@ const LoginForm = () => {
             >
               {errMsg}
             </p>
-            <h1>Login</h1>
+            <h1>{t("Login")}</h1>
             <InputField
               type="text"
-              label="Username"
+              label={t("Username")}
               value={username.value}
               onChange={username.handleChange}
               valid={username.valid}
               focus={username.handleFocus}
               blur={username.handleBlur}
               placeholder="Choose a unique username"
-              instruction="Invalid Username"
+              instruction={instructionMessages.username}
+              allowInstructionMessages={false}
             />
             <InputField
               type="password"
-              label="Password"
+              label={t("Password")}
               value={password.value}
               onChange={password.handleChange}
               valid={password.valid}
               focus={password.handleFocus}
               blur={password.handleBlur}
               placeholder="Create a strong password"
-              instruction="Invalid Password"
+              instruction={instructionMessages.password}
+              allowInstructionMessages={false}
             />
 
             <button
               type="submit"
               className="mt-4"
-              disabled={!username.valid || !password.valid ? true : false}
+              disabled={(!username.valid || !password.valid) ? true : false}
             >
-              Login
+              {t("Login")}
             </button>
 
             <p className="mt-2">
-              Forgot <a href="/">Password? </a>
-              <Link to="/register">Signup</Link>
+              {t("Forgot")} <a href="/">{t("Password")}? </a>
+              <Link to="/register">{t("Sign_Up")}</Link>
             </p>
           </section>
         </form>

@@ -11,7 +11,7 @@ import PageNotFound from "./Pages/Website/Auth/Missing/PageNotFound";
 import UnauthorizedPage from "./Pages/Website/Auth/Unauthorized/UnaothorizedPage";
 import { UserRole } from "./Models/User/UserRole";
 import Layout from "./Pages/Website/Layout/Layout";
-
+import Test from "./Pages/Test/test";
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +21,7 @@ function App() {
           <Route path="login" element={<LoginPage />}></Route>
           <Route path="register" element={<SignUpPage />}></Route>
           <Route path="unauthorized" element={<UnauthorizedPage />}></Route>
+          <Route path="test" element={<Test />}></Route>
 
           {/* Protected Routes */}
           <Route element={<PersistLogin />}>

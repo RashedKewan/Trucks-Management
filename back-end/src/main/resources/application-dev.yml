@@ -1,0 +1,20 @@
+#Database
+MY_SQL_USERNAME: springstudent
+MY_SQL_PASSWORD: springstudent
+MY_SQL_HOST: 127.0.0.1
+MY_SQL_PORT: 3306
+
+
+#Server
+SERVER_PORT: 8081
+ACTIVE_PROFILE: dev
+
+#Client
+CLIENT_SERVER_PORT: 3000
+
+#Email Config
+EMAIL_HOST: smtp.gmail.com
+EMAIL_PORT: 587
+EMAIL_ID: trucks.management.system@gmail.com
+EMAIL_PASSWORD: lnti ptds iucc zfwj
+VERIFY_EMAIL_HOST: http://localhost:${CLIENT_SERVER_PORT}

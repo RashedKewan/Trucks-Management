@@ -1,9 +1,38 @@
 spring:
+  profiles:
+    active: ${ACTIVE_PROFILE:dev}
+    
   datasource:
     url: jdbc:mysql://localhost:3306/trucks
     username: springstudent
     password: springstudent
   
+# Email Config
+
+  mail:
+    host: ${EMAIL_HOST}
+    port: ${EMAIL_PORT}
+    username: ${EMAIL_ID}
+    password: ${EMAIL_PASSWORD}
+    default-encoding: UTF-8
+    properties:
+      mail:
+        mime:
+          charset: UTF
+        smtp:
+          writetimeout: 10000
+          connectiontimeout: 10000
+          timeout: 10000
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    verify:
+      host: ${VERIFY_EMAIL_HOST}
+    
+    
+    
+    
   jpa:
     hibernate:
       ddl-auto: update # This setting will create and drop tables on startup
@@ -11,7 +40,7 @@ spring:
    
       
 server:
-  port: 8081
+  port: ${SERVER_PORT}
   
 application:
   security:
@@ -22,3 +51,4 @@ application:
         expiration: 604800000 # 7 days
     filter:
       order: 10
+      

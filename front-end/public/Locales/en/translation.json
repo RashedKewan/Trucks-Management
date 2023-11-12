@@ -28,7 +28,16 @@
     "instructionMessages.email": "Must have the format 'name@example.com'. Allowed characters: letters (uppercase or lowercase), numbers, dots, underscores, and hyphens. The domain part should have at least one dot and end with 2 to 4 alphabetic characters (e.g., '.com', '.org', '.io').",
     "instructionMessages.company": "Allowed characters: letters (uppercase or lowercase), numbers, spaces, periods, commas, hyphens, and apostrophes. Company name may include special characters such as commas and periods.",
     "instructionMessages.city": "Allowed characters: letters (uppercase or lowercase), spaces, hyphens, and apostrophes. City names may include spaces and common punctuation characters.",
-    "instructionMessages.confirmPassword": "Must match the first password input field."
+    "instructionMessages.confirmPassword": "Must match the first password input field.",
   
-    
+    "Registration_Failed": "Registration Failed",
+    "Email_Taken":"Email Taken",
+    "Username_Taken":"Username Taken",
+    "No_Server_Response":"No Server Response",
+
+    "Account_Not_Enabled":"Account Not Enabled",
+    "Wrong_Credentials":"Wrong Credentials",
+    "Verified_Successfully":"Verified Successfully",
+    "Account_Already_Verified":"Account Already Verified",
+    "Logout_Successful":"Logout Successful"
 }

@@ -3,8 +3,9 @@ import { User } from "../Website/Context/UserContext";
 import axios from "../../Lib/axios";
 import Cookies from "universal-cookie";
 import {useNavigate } from "react-router-dom";
+import { API_ENDPOINTS, ROUTE_PATHS } from "../../utils/Consts";
 
-const LOGOUT_URL = "api/v1/auth/logout";
+
 
 const Dashboard = () => {
   const userContext = useContext(User);
@@ -18,14 +19,14 @@ const Dashboard = () => {
 
   async function logout(event) {
     try {
-      const res = await axios.post(LOGOUT_URL, null, {
+      const res = await axios.post(API_ENDPOINTS.LOGOUT, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       cookie.remove("Bearer");
       console.log(res);
-      navigateTo("/login");
+      navigateTo(ROUTE_PATHS.LOGIN, {state:{logout:true}});
     } catch (err) {}
   };
 

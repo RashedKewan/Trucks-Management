@@ -16,6 +16,11 @@ public class UserController {
 
     private final UserService service;
 
+    /**
+     *  @PatchMapping annotation is used to handle HTTP PATCH requests. The PATCH method is 
+     *  typically used for partial updates to a resource. Unlike PUT, which is used to update 
+     *  the entire resource, PATCH is used to apply partial modifications to the resource.
+     */
     @PatchMapping
     public ResponseEntity<?> changePassword(
           @RequestBody ChangePasswordRequest request,

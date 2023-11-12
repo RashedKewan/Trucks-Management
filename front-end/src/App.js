@@ -11,7 +11,15 @@ import PageNotFound from "./Pages/Website/Auth/Missing/PageNotFound";
 import UnauthorizedPage from "./Pages/Website/Auth/Unauthorized/UnaothorizedPage";
 import { UserRole } from "./Models/User/UserRole";
 import Layout from "./Pages/Website/Layout/Layout";
-import Test from "./Pages/Test/test";
+// import Test from "./Pages/Test/test";
+import SignupSuccess from "./Pages/Website/Auth/SignUp/SignupSuccess";
+import VerificationSuccess from "./Pages/Website/Auth/SignUp/VerificationSuccess";
+import AlreadyVerified from "./Pages/Website/Auth/SignUp/AlreadyVerified";
+import VerificationFailed from "./Pages/Website/Auth/SignUp/VerificationFailed";
+import VerifingPage from "./Pages/Website/Auth/SignUp/VerifyingPage";
+
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -21,7 +29,11 @@ function App() {
           <Route path="login" element={<LoginPage />}></Route>
           <Route path="register" element={<SignUpPage />}></Route>
           <Route path="unauthorized" element={<UnauthorizedPage />}></Route>
-          <Route path="test" element={<Test />}></Route>
+          <Route path="register-success" element={<SignupSuccess />}></Route>
+          <Route path="verification-success" element={<VerificationSuccess />}></Route>
+          <Route path="verification-failed" element={<VerificationFailed />}></Route>
+          <Route path="verification" element={<AlreadyVerified />}></Route>
+          <Route path="verifying" element={<VerifingPage />}></Route>
 
           {/* Protected Routes */}
           <Route element={<PersistLogin />}>

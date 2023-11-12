@@ -10,11 +10,18 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trucksmanagement.backend.config.JwtService;
+import com.trucksmanagement.backend.email.EmailService;
+import com.trucksmanagement.backend.email.confirmation.Confirmation;
+import com.trucksmanagement.backend.email.confirmation.ConfirmationService;
+import com.trucksmanagement.backend.exception.AccountNotEnabledErrorResponse;
+import com.trucksmanagement.backend.exception.EmailExistsErrorResponse;
+import com.trucksmanagement.backend.exception.RegisterFailedErrorResponse;
+import com.trucksmanagement.backend.exception.UsernameExistsErrorResponse;
 import com.trucksmanagement.backend.token.Token;
-import com.trucksmanagement.backend.token.TokenRepository;
+import com.trucksmanagement.backend.token.TokenService;
 import com.trucksmanagement.backend.token.TokenType;
 import com.trucksmanagement.backend.user.User;
-import com.trucksmanagement.backend.user.UserRepository;
+import com.trucksmanagement.backend.user.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,56 +30,74 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-	private final UserRepository repository;
-	private final TokenRepository tokenRepository;
+	private final UserService userService;
+	private final ConfirmationService confirmationService;
+	private final TokenService tokenService;
 	private final PasswordEncoder passwordEncoder;
 	private final JwtService jwtService;
+	private final EmailService emailService;
 	private final AuthenticationManager authenticationManager;
 
-	public AuthenticationResponse register(RegisterRequest request) {
-		// check if username exists
-		var user =  User.builder()
-						.firstname(request.getFirstname())
-						.lastname(request.getLastname())
-						.username(request.getUsername())
-						.email(request.getEmail())
-						.password(passwordEncoder.encode(request.getPassword()))
-						.company(request.getCompany())
-						.numberOfTrucks(0)
-						.city(request.getCity())
-						.role(request.getRole())
-						.isActive(true)
-						.build();
+	public AuthenticationResponse register(RegisterRequest request)
+			throws UsernameExistsErrorResponse, EmailExistsErrorResponse, RegisterFailedErrorResponse {
+		String username = request.getUsername();
+		String email = request.getEmail();
 
-		var savedUser = repository.save(user);
+		if (userService.existsByUsername(username)) {
+			throw new UsernameExistsErrorResponse("Username taken");
+		}
+
+		if (userService.existsByEmail(email)) {
+			throw new EmailExistsErrorResponse("Email already registered");
+		}
+		// check if username exists
+		var user = User.builder()
+				.firstname(request.getFirstname())
+				.lastname(request.getLastname())
+				.username(request.getUsername())
+				.email(request.getEmail())
+				.password(passwordEncoder.encode(request.getPassword()))
+				.company(request.getCompany())
+				.numberOfTrucks(0)
+				.city(request.getCity())
+				.role(request.getRole())
+				.isActive(false)
+				.build();
+		
+		
+		var savedUser = userService.save(user);
+		if(savedUser == null) {
+			throw new RegisterFailedErrorResponse("Failed to save data for: "+user);
+		}
 		var jwtToken = jwtService.generateToken(user);
 		var refreshToken = jwtService.generateRefreshToken(user);
 		saveUserToken(savedUser, jwtToken);
-		return AuthenticationResponse
-				.builder()
+
+		Confirmation confirmation = new Confirmation(user);
+		confirmationService.save(confirmation);
+		emailService.sendHtmlEmail(user.getFirstname(), user.getEmail(), confirmation.getToken());
+		return AuthenticationResponse.builder()
 				.user(user)
 				.accessToken(jwtToken)
 				.refreshToken(refreshToken)
+				.confirmationToken(confirmation.getToken())
 				.build();
 	}
 
-	public AuthenticationResponse authenticate(AuthenticationRequest request) {
+	public AuthenticationResponse authenticate(AuthenticationRequest request) throws AccountNotEnabledErrorResponse {
 		authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
-		var user = repository.findByUsername(request.getUsername()).orElseThrow();
+		var user = userService.findByUsername(request.getUsername()).orElseThrow();
+		if (!user.getIsActive()) {
+			throw new AccountNotEnabledErrorResponse("Account not Enabled");
+		}
 		var jwtToken = jwtService.generateToken(user);
 		var refreshToken = jwtService.generateRefreshToken(user);
 		revokeAllUserTokens(user);
 		saveUserToken(user, jwtToken);
-		return AuthenticationResponse
-				.builder()
-				.user(user)
-				.accessToken(jwtToken)
-				.refreshToken(refreshToken)
-				.build();
+		return AuthenticationResponse.builder().user(user).accessToken(jwtToken).refreshToken(refreshToken).build();
 	}
-	
 
 	private void saveUserToken(User user, String jwtToken) {
 		var token = Token.builder()
@@ -82,11 +107,11 @@ public class AuthenticationService {
 				.expired(false)
 				.revoked(false)
 				.build();
-		tokenRepository.save(token);
+		tokenService.save(token);
 	}
 
 	private void revokeAllUserTokens(User user) {
-		var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
+		var validUserTokens = tokenService.findAllValidTokenByUser(user.getId());
 		if (validUserTokens.isEmpty())
 			return;
 		validUserTokens.forEach(token -> {
@@ -94,7 +119,7 @@ public class AuthenticationService {
 			token.setRevoked(true);
 
 		});
-		tokenRepository.saveAll(validUserTokens);
+		tokenService.saveAll(validUserTokens);
 //		tokenRepository.deleteAll(validUserTokens);
 	}
 
@@ -108,15 +133,21 @@ public class AuthenticationService {
 		refreshToken = authHeader.substring(7);
 		userUsername = jwtService.extractUsername(refreshToken);
 		if (userUsername != null) {
-			var user = this.repository.findByUsername(userUsername).orElseThrow();
+			var user = userService.findByUsername(userUsername).orElseThrow();
 			if (jwtService.isTokenValid(refreshToken, user)) {
 				var accessToken = jwtService.generateToken(user);
 				revokeAllUserTokens(user);
 				saveUserToken(user, accessToken);
-				var authResponse = AuthenticationResponse.builder().user(user).accessToken(accessToken)
-						.refreshToken(refreshToken).build();
+				var authResponse = AuthenticationResponse.builder()
+						.user(user)
+						.accessToken(accessToken)
+						.refreshToken(refreshToken)
+						.build();
 				new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
 			}
 		}
 	}
+
+
+
 }

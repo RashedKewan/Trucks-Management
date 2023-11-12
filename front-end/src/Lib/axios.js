@@ -1,7 +1,12 @@
-import axios from "axios";
-export default axios.create({
+import axios_ from "axios";
+
+
+const axios =  axios_.create({
   baseURL: "http://localhost:8081",
 });
+
+// Set default Content-Type header
+axios.defaults.headers.common['Content-Type'] = 'application/json';
 // axios.defaults.baseURL = 'http://localhost:8081';
 // axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -18,3 +23,4 @@ export default axios.create({
 //         headers: headers,
 //         data: data});
 // };
+export default axios;

@@ -8,8 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.trucksmanagement.backend.email.confirmation.Confirmation;
 import com.trucksmanagement.backend.token.Token;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -54,7 +56,6 @@ public class User implements UserDetails {
 	private String company;
 	private Integer numberOfTrucks;
 	private String city;
-	@JsonIgnore
 	private Boolean isActive;
 	@Enumerated(EnumType.STRING)
 	private Role role;
@@ -66,6 +67,10 @@ public class User implements UserDetails {
 //	@JsonManagedReference
 //	@OneToMany(mappedBy = "user")
 //	private List<Token> tokens;
+	
+//	@JsonManagedReference
+//	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//	private List<Confirmation> confirmations;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

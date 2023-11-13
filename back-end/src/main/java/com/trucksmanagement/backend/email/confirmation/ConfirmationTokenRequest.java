@@ -7,14 +7,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ConfirmationTokenResponse {
+public class ConfirmationTokenRequest {
 
-	@JsonProperty("status")
-	private String status;
-	@JsonProperty("email")
-	private String email;
+	@JsonProperty("token")
+	private String token;
+	@JsonProperty("requestTo")
+	private String requestTo;
 }

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResendEmailRequest {
+public class SendEmailRequest {
 	@JsonProperty("email")
 	private String email;
 }

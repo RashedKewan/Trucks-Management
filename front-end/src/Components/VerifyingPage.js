@@ -4,9 +4,10 @@ import {
   API_ENDPOINTS,
   ERROR_CODES,
   ROUTE_PATHS,
-} from "../../../../utils/Consts";
-import axios from "../../../../Lib/axios";
-import Loading from "../../../../Components/Loading";
+  Verification_STATUS,
+} from "../utils/Consts";
+import axios from "../Lib/axios";
+import Loading from "./Loading";
 /**
  * @component VerifyingPage
  * @description
@@ -35,7 +36,7 @@ import Loading from "../../../../Components/Loading";
  *  - Navigates to the appropriate page based on the verification result (success, failure, or already verified).
  *  - Displays a loading state during the verification process.
  */
-const VerifyingPage = () => {
+const VerifyingPage = ({navigateToPage, requestTo}) => {
   const [confirmRequest, setConfirmRequest] = useState(false);
 
   // Get Navigator
@@ -77,14 +78,16 @@ const VerifyingPage = () => {
           // Make the confirmation request to the server
           let res = await axios.post(API_ENDPOINTS.CONFIRMATION, {
             token: tokenParamRef.current,
+            requestTo: requestTo,
           });
 
           // Log the response data for debugging
-          console.log(res.data);
+          console.log(res.data.status);
 
           // Navigate to the verification success page on successful verification
-          if (res.data === true) {
-            navigateTo(ROUTE_PATHS.VERIFICATION_SUCCESS);
+          if (res.data.status === Verification_STATUS.SUCCESS) {
+            // navigateTo(ROUTE_PATHS.VERIFICATION_SUCCESS, {state:{email: res.data.email}});
+            navigateTo(navigateToPage, {state:{email: res.data.email}});
           }
         }
       } catch (err) {

@@ -1,6 +1,7 @@
 package com.trucksmanagement.backend.auth;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,11 +12,15 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trucksmanagement.backend.config.JwtService;
 import com.trucksmanagement.backend.email.EmailService;
+import com.trucksmanagement.backend.email.EmailServiceImpl;
+import com.trucksmanagement.backend.email.SendEmailRequest;
 import com.trucksmanagement.backend.email.confirmation.Confirmation;
 import com.trucksmanagement.backend.email.confirmation.ConfirmationService;
 import com.trucksmanagement.backend.exception.AccountNotEnabledErrorResponse;
 import com.trucksmanagement.backend.exception.EmailExistsErrorResponse;
+import com.trucksmanagement.backend.exception.EmailFailedToSendErrorResponse;
 import com.trucksmanagement.backend.exception.RegisterFailedErrorResponse;
+import com.trucksmanagement.backend.exception.UserDoesNotExistErrorResponse;
 import com.trucksmanagement.backend.exception.UsernameExistsErrorResponse;
 import com.trucksmanagement.backend.token.Token;
 import com.trucksmanagement.backend.token.TokenService;
@@ -39,7 +44,7 @@ public class AuthenticationService {
 	private final AuthenticationManager authenticationManager;
 
 	public AuthenticationResponse register(RegisterRequest request)
-			throws UsernameExistsErrorResponse, EmailExistsErrorResponse, RegisterFailedErrorResponse {
+			throws UsernameExistsErrorResponse, EmailExistsErrorResponse, RegisterFailedErrorResponse,EmailFailedToSendErrorResponse {
 		String username = request.getUsername();
 		String email = request.getEmail();
 
@@ -72,16 +77,20 @@ public class AuthenticationService {
 		var jwtToken = jwtService.generateToken(user);
 		var refreshToken = jwtService.generateRefreshToken(user);
 		saveUserToken(savedUser, jwtToken);
-
-		Confirmation confirmation = new Confirmation(user);
-		confirmationService.save(confirmation);
-		emailService.sendHtmlEmail(user.getFirstname(), user.getEmail(), confirmation.getToken());
-		return AuthenticationResponse.builder()
-				.user(user)
-				.accessToken(jwtToken)
-				.refreshToken(refreshToken)
-				.confirmationToken(confirmation.getToken())
-				.build();
+		try {
+			
+			Confirmation confirmation = new Confirmation(user);
+			confirmationService.save(confirmation);
+			emailService.sendHtmlEmail(user.getFirstname(), user.getEmail(), confirmation.getToken(),EmailServiceImpl.NEW_ACCOUNT_EMAIL_TEMPLATE);
+			return AuthenticationResponse.builder()
+					.user(user)
+					.accessToken(jwtToken)
+					.refreshToken(refreshToken)
+					.confirmationToken(confirmation.getToken())
+					.build();
+		}catch (Exception e) {
+			throw new EmailFailedToSendErrorResponse("Email Failed To Send");
+		}
 	}
 
 	public AuthenticationResponse authenticate(AuthenticationRequest request) throws AccountNotEnabledErrorResponse {
@@ -146,6 +155,24 @@ public class AuthenticationService {
 				new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
 			}
 		}
+	}
+
+	public boolean resetPasswordRequest(SendEmailRequest request) throws UserDoesNotExistErrorResponse {
+
+		Optional<User> userOptional = userService.findByEmail(request.getEmail());
+		if (userOptional.isPresent()) {
+			User user = userOptional.get();
+			Confirmation confirmation = new Confirmation(user);
+			confirmationService.save(confirmation);
+			emailService.sendHtmlEmail(
+					user.getFirstname(), 
+					user.getEmail(), 
+					confirmation.getToken(),
+					EmailServiceImpl.RESET_PASSWORD_EMAIL_TEMPLATE);
+			return Boolean.TRUE;
+		}
+		throw new UserDoesNotExistErrorResponse("User Does Not Exist.");
+
 	}
 
 

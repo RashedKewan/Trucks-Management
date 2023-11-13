@@ -1,4 +1,4 @@
-import { Container, Row, Col, Alert, Button } from "react-bootstrap";
+import { Container, Row, Col, Alert, Button, Image } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "../../../../Lib/axios";
@@ -74,11 +74,15 @@ const SignupSuccess = () => {
       <Row className="justify-content-md-center">
         <Col xs={12} md={6}>
           <Alert variant="success">
+            <div className="text-center m-2">
             <Alert.Heading>Account Created Successfully!</Alert.Heading>
+                <Image src="send-data.png" alt="send-data" fluid />
+              </div>
             <p>
               An email has been sent to your email address. Please check it out
               to verify your account.
             </p>
+            
           </Alert>
           {
             <div className="text-center">

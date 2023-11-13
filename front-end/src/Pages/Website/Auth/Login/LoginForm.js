@@ -99,7 +99,7 @@ const LoginForm = () => {
       // Reset the success message if no logout operation is detected
       setSuccessMsg("");
     }
-  }, [currentLanguageCode, t,location.state]);
+  }, [currentLanguageCode, t, location.state]);
 
   /**
    * @function Submit
@@ -123,6 +123,8 @@ const LoginForm = () => {
    */
   const Submit = async (event) => {
     try {
+      setSuccessMsg("");
+      setErrMsg("");
       // Prevent default form submission behavior
       event.preventDefault();
 
@@ -222,7 +224,8 @@ const LoginForm = () => {
             </button>
 
             <p className="mt-2">
-              {t("Forgot")} <a href="/">{t("Password")}? </a>
+              {t("Forgot")}{" "}
+              <a href={ROUTE_PATHS.RESET_PASSWORD_REQUEST}>{t("Password")}? </a>
               <Link to={ROUTE_PATHS.REGISTER}>{t("Sign_Up")}</Link>
             </p>
           </section>

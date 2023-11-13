@@ -7,6 +7,9 @@ export const API_ENDPOINTS = {
   CONFIRMATION: "/api/v1/auth/confirm",
   RESEND_EMAIL: "/api/v1/auth/resend-email",
   REFRESH: "/api/v1/auth/refresh-token",
+  RESET_PASSWORD: "/api/v1/auth/reset-password",
+  CHANGE_PASSWORD: "/api/v1/auth/change-password",
+  RESET_PASSWORD_REQUEST: "/api/v1/auth/reset-password-request",
 };
 
 export const ROUTE_PATHS = {
@@ -18,7 +21,12 @@ export const ROUTE_PATHS = {
   VERIFICATION_FAILED: "/verification-failed",
   VERIFICATION: "/verification",
   VERIFYING: "/verifying",
-  DASHBOARD: "/", // Assuming your Dashboard route is at the root
+  RESEND_EMAIL:"/resend-email",
+  RESET_PASSWORD:"/reset-password",
+  CHANGE_PASSWORD:"/change-password",
+  RESET_PASSWORD_REQUEST:"/reset-password-request",
+  RESET_PASSWORD_REQUEST_SUCCESS:"/reset-password-request-success",
+  DASHBOARD: "/", 
 };
 
 export const REGEX = {
@@ -40,4 +48,14 @@ export const ERROR_CODES = {
   Email_Taken: 5100, // email already taken
   EMAIL_FAILED_TO_SEND: 5101, // Email Failed to Send
   SERVER_ERROR: 5050, // Indicates a general server error during registration
+  RESET_PASSWORD_INCORRECT_USERNAME_ERROR:5200,
+  USER_DOES__NOT_EXIST_ERROR:5201
+};
+
+
+
+export const Verification_STATUS ={
+  SUCCESS:"SUCCESS", 
+  FAIL:"FAIL", 
+  ALREADY_VERIFIED:"ALREADY_VERIFIED",
 };

@@ -29,7 +29,8 @@ import static com.trucksmanagement.backend.email.EmailUtils.getVerificationUrl;
 public class EmailServiceImpl implements EmailService {
 	public static final String NEW_USER_ACCOUNT_VERIFICATION = "New User Account Verification";
 	public static final String UTF_8_ENCODING = "UTF-8";
-	public static final String EMAIL_TEMPLATE = "emailtemplate";
+	public static final String NEW_ACCOUNT_EMAIL_TEMPLATE = "NewAccountEmailTemplate";
+	public static final String RESET_PASSWORD_EMAIL_TEMPLATE = "ResetPasswordEmailTemplate";
 	public static final String TEXT_HTML_ENCONDING = "text/html";
 	private final JavaMailSender emailSender;
 	private final TemplateEngine templateEngine;
@@ -112,15 +113,15 @@ public class EmailServiceImpl implements EmailService {
 
 	@Override
 	@Async
-	public void sendHtmlEmail(String name, String to, String token) {
+	public void sendHtmlEmail(String name, String to, String token, String emailTemplate) {
 		try {
 			Context context = new Context();
 			/*
 			 * context.setVariable("name", name); context.setVariable("url",
 			 * getVerificationUrl(host, token));
 			 */
-			context.setVariables(Map.of("name", name, "url", getVerificationUrl(host, token)));
-			String text = templateEngine.process(EMAIL_TEMPLATE, context);
+			context.setVariables(Map.of("name", name, "url", getVerificationUrl(host, token,emailTemplate)));
+			String text = templateEngine.process(emailTemplate, context);
 			MimeMessage message = getMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, UTF_8_ENCODING);
 			helper.setPriority(1);
@@ -149,7 +150,7 @@ public class EmailServiceImpl implements EmailService {
 
 	@Override
 	@Async
-	public void sendHtmlEmailWithEmbeddedFiles(String name, String to, String token) {
+	public void sendHtmlEmailWithEmbeddedFiles(String name, String to, String token,String emailTemplate) {
 		try {
 			MimeMessage message = getMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, UTF_8_ENCODING);
@@ -159,8 +160,8 @@ public class EmailServiceImpl implements EmailService {
 			helper.setTo(to);
 			// helper.setText(text, true);
 			Context context = new Context();
-			context.setVariables(Map.of("name", name, "url", getVerificationUrl(host, token)));
-			String text = templateEngine.process(EMAIL_TEMPLATE, context);
+			context.setVariables(Map.of("name", name, "url", getVerificationUrl(host, token , emailTemplate)));
+			String text = templateEngine.process(emailTemplate, context);
 
 			// Add HTML email body
 			MimeMultipart mimeMultipart = new MimeMultipart("related");

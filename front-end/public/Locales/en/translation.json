@@ -14,10 +14,14 @@
     "Email":"Email",
     "Password":"Password",
     "Confirm_Password":"Confirm Password",
+    "Reset_Password":"Reset Password",
     "Forgot":"Forgot",
     "Already_Registered":"Already Registered",
     "Back_to_Home": "Back to Home",
     
+
+    "Send":"Send",
+
     "instructionMessages.Invalid_Username":"Invalid Username",
     "instructionMessages.Invalid_Password":"Invalid Password",
 
@@ -34,7 +38,7 @@
     "Email_Taken":"Email Taken",
     "Username_Taken":"Username Taken",
     "No_Server_Response":"No Server Response",
-
+    "EMAIL_FAILED_TO_SEND":"Email Failed To Send",
     "Account_Not_Enabled":"Account Not Enabled",
     "Wrong_Credentials":"Wrong Credentials",
     "Verified_Successfully":"Verified Successfully",

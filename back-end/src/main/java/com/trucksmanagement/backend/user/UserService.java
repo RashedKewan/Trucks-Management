@@ -1,8 +1,8 @@
 package com.trucksmanagement.backend.user;
 
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.var;
 
-import org.springframework.data.util.Pair;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.trucksmanagement.backend.email.VerificationStatus;
 import com.trucksmanagement.backend.email.confirmation.Confirmation;
 import com.trucksmanagement.backend.email.confirmation.ConfirmationRepository;
+import com.trucksmanagement.backend.email.confirmation.ConfirmationTokenRequest;
+import com.trucksmanagement.backend.email.confirmation.ConfirmationTokenResponse;
+import com.trucksmanagement.backend.exception.ResetPasswordIncorrectUsenameErrorResponse;
 
 import java.security.Principal;
 import java.util.Optional;
@@ -50,18 +53,48 @@ public class UserService {
 		repository.save(user);
 	}
 
-	public VerificationStatus verifyToken(String token) {
-		Confirmation confirmation = confirmationRepository.findByToken(token);
+	public void resetPassword(ResetPasswordRequest request) throws ResetPasswordIncorrectUsenameErrorResponse{
+
+		Optional<User> userOpt = repository.findByUsername(request.getUsername());
+		if (userOpt.isPresent()) {
+			User user = userOpt.get();
+			if (user.getEmail().equals(request.getEmail())) {
+				// update the password
+				user.setPassword(passwordEncoder.encode(request.getPassword()));
+				// save the new password
+				repository.save(user);
+			}else {
+				throw new ResetPasswordIncorrectUsenameErrorResponse("Incorrect Username");
+			}
+		}
+	}
+
+	public ConfirmationTokenResponse verifyToken(ConfirmationTokenRequest request) {
+		Confirmation confirmation = confirmationRepository.findByToken(request.getToken());
 		if (confirmation == null) {
-			return VerificationStatus.FAIL;
+			return ConfirmationTokenResponse
+					.builder()
+					.status( VerificationStatus.FAIL.toString())
+					.build();
 		}
 		User user = repository.findByEmailIgnoreCase(confirmation.getUser().getEmail());
-		if (user.getIsActive()) {
-			return VerificationStatus.ALREADY_VERIFIED;
+		if (!request.getRequestTo().equals("RESET_PASSWORD")) {
+			if (user.getIsActive()) {
+				return ConfirmationTokenResponse
+						.builder()
+						.status( VerificationStatus.ALREADY_VERIFIED.toString())
+						.email(user.getEmail())
+						.build();
+			}
+			user.setIsActive(true);
+			repository.save(user);
 		}
-		user.setIsActive(true);
-		repository.save(user);
-		return VerificationStatus.SUCCESS;
+
+		return ConfirmationTokenResponse
+				.builder()
+				.status( VerificationStatus.SUCCESS.toString())
+				.email(user.getEmail())
+				.build(); 
 	}
 
 	public Optional<User> findByEmail(String email) {

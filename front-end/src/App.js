@@ -16,7 +16,12 @@ import SignupSuccess from "./Pages/Website/Auth/SignUp/SignupSuccess";
 import VerificationSuccess from "./Pages/Website/Auth/SignUp/VerificationSuccess";
 import AlreadyVerified from "./Pages/Website/Auth/SignUp/AlreadyVerified";
 import VerificationFailed from "./Pages/Website/Auth/SignUp/VerificationFailed";
-import VerifingPage from "./Pages/Website/Auth/SignUp/VerifyingPage";
+import ResendEmail from "./Pages/Website/Auth/SignUp/ResendEmail";
+import ResetPassword from "./Pages/Website/Auth/SignUp/ResetPassword";
+import PasswordResetRequestPage from "./Pages/Website/Auth/SignUp/PasswordResetRequestPage";
+import PasswordResetRequestSuccessPage from "./Pages/Website/Auth/SignUp/PasswordResetRequestSuccessPage";
+import ResetPasswordEmailVerifyingPage from "./Pages/Website/Auth/SignUp/ResetPasswordEmailVerifyingPage";
+import NewAccountEmailVerifyingPage from "./Pages/Website/Auth/SignUp/NewAccountEmailVerifyingPage";
 
 
 
@@ -33,7 +38,12 @@ function App() {
           <Route path="verification-success" element={<VerificationSuccess />}></Route>
           <Route path="verification-failed" element={<VerificationFailed />}></Route>
           <Route path="verification" element={<AlreadyVerified />}></Route>
-          <Route path="verifying" element={<VerifingPage />}></Route>
+          <Route path="reset-password-email-verifying" element={<ResetPasswordEmailVerifyingPage />}></Route>
+          <Route path="new-account-email-verifying" element={<NewAccountEmailVerifyingPage />}></Route>
+          <Route path="resend-email" element={<ResendEmail />}></Route>
+          <Route path="reset-password" element={<ResetPassword />}></Route>
+          <Route path="reset-password-request" element={<PasswordResetRequestPage />}></Route>
+          <Route path="reset-password-request-success" element={<PasswordResetRequestSuccessPage />}></Route>
 
           {/* Protected Routes */}
           <Route element={<PersistLogin />}>

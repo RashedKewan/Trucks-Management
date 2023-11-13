@@ -71,6 +71,7 @@ const Register = () => {
    */
   const handleSubmit = async (e) => {
     try {
+      setErrMsg("");
       // Prevent the default form submission behavior
       e.preventDefault();
 
@@ -117,6 +118,8 @@ const Register = () => {
         setErrMsg(t("Username_Taken"));
       } else if (err.response?.data === ERROR_CODES.Email_Taken) {
         setErrMsg(t("Email_Taken"));
+      } else if (err.response?.data === ERROR_CODES.EMAIL_FAILED_TO_SEND) {
+        setErrMsg(t("EMAIL_FAILED_TO_SEND"));
       } else if (err.response?.data === ERROR_CODES.SERVER_ERROR) {
         setErrMsg(t("Registration_Failed"));
       }

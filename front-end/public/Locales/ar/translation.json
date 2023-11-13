@@ -14,10 +14,13 @@
     "Email": "البريد الإلكتروني",
     "Password": "كلمة المرور",
     "Confirm_Password": "تأكيد كلمة المرور",
+    "Reset_Password": "إعادة ضبط كلمة المرور",
     "Forgot": "نسيت",
     "Already_Registered": "مسجل بالفعل",
     "Back_to_Home": "العودة إلى الصفحة الرئيسية",
 
+
+    "Send":"ارسل",
 
     "instructionMessages.Invalid_Username":"اسم المستخدم غير صالح",
     "instructionMessages.Invalid_Password":"كلمة المرور غير صالحة",
@@ -36,6 +39,7 @@
     "Username_Taken": "اسم المستخدم مأخوذ",
     "No_Server_Response": "لا توجد استجابة من الخادم",
     "Account_Not_Enabled":"الحساب غير مفعل",
+    "EMAIL_FAILED_TO_SEND":"فشل إرسال البريد الإلكتروني",
     "Wrong_Credentials": "بيانات الاعتماد غير صحيحة",
     "Verified_Successfully": "تم التحقق بنجاح",
     "Account_Already_Verified": "الحساب تم تحققه بالفعل",

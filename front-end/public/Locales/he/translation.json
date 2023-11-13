@@ -14,10 +14,16 @@
     "Email": "אימייל",
     "Password": "סיסמה",
     "Confirm_Password": "אשר סיסמה",
+    "Reset_Password": "איפוס סיסמה",
     "Forgot": "שכחת",
     "Already_Registered": "כבר רשום",
     "Back_to_Home": "חזרה לדף הבית",
 
+    "Send":"שלח",
+   "Resend_your_mail": "שלח מייל מחדש לאימות",
+    "Insert_your_mail": "אנא הזן/י את האימייל שלך:",
+    
+      
     "instructionMessages.Invalid_Username":"הוזן שם משתמש לא תקין",
     "instructionMessages.Invalid_Password":"הסיסמה לא חוקית",
 
@@ -34,7 +40,7 @@
     "Email_Taken":"כתובת האימייל תפוסה",
     "Username_Taken":"שם המשתמש תפוס",
     "No_Server_Response":"אין תגובה מהשרת",
-    
+    "EMAIL_FAILED_TO_SEND":"שליחת האימייל נכשלה",
     "Account_Not_Enabled":"החשבון לא מופעל",
     "Wrong_Credentials": "פרטי התחברות שגויים",
     "Verified_Successfully": "אומת בהצלחה",

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import InputField from "../../../../Components/InputField";
 import { useTranslation } from "react-i18next";
 import {
@@ -38,7 +38,7 @@ const PasswordResetRequestPage = () => {
       });
       console.log(res.data);
       if (res.data === true) {
-        navigateTo(ROUTE_PATHS.RESET_PASSWORD_REQUEST_SUCCESS, {state:{email:email.value, accessible: true}});
+        navigateTo(ROUTE_PATHS.ResetPasswordRequestSuccessPage, {state:{email:email.value, accessible: true}});
       }
     } catch (err) {
       if (!err?.response) {
@@ -65,7 +65,7 @@ const PasswordResetRequestPage = () => {
               </div>
 
               <div className="text-center m-2">
-                <Image src="send-data.png" alt="send-data" fluid />
+                <Image src="/Assets/Images/send-data.png" alt="send-data" fluid />
               </div>
               <div className="m-2" style={{ fontSize: "1rem" }}>
                 {t("Insert_your_mail")}

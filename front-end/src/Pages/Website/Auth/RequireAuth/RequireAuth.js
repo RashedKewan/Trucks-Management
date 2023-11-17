@@ -31,6 +31,6 @@ export default function RequireAuth() {
   return user.auth.userDetails ? (
     <Outlet />
   ) : (
-    <Navigate state={{ from: location }} replace to={ROUTE_PATHS.LOGIN} />
+    <Navigate state={{ from: location }} replace to={ROUTE_PATHS.LoginPage} />
   );
 }

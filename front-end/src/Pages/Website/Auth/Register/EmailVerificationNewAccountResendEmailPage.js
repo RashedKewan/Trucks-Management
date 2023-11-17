@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 import axios from "../../../../Lib/axios";
 import { Image } from "react-bootstrap";
 
-function ResendEmail() {
+function EmailVerificationNewAccountResendEmailPage() {
   const { t } = useTranslation();
 
   const [successMsg, setSuccessMsg] = useState("");
@@ -25,19 +25,19 @@ function ResendEmail() {
     email: t("instructionMessages.email"),
   };
   /**************************** CONSTS *******************************/
-  const [showResendButton, setShowResendButton] = useState(false);
+  const [showResendButton, setShowResendButton] = useState(true);
   const location = useLocation();
   /**************************** FUNCTIONS *******************************/
   /**
    * Initial timer for the re-send eamil button
    * @return: Cleanup the timeout to avoid memory leaks
    */
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setShowResendButton(true);
-    }, TIME_TO_RESEND_EMAIL_AGAIN);
-    return () => clearTimeout(timeoutId);
-  }, []);
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     setShowResendButton(true);
+  //   }, TIME_TO_RESEND_EMAIL_AGAIN);
+  //   return () => clearTimeout(timeoutId);
+  // }, []);
 
   /**
    * Disabling re-send eamil button for 'TIME_TO_RESEND_EMAIL_AGAIN'
@@ -100,7 +100,7 @@ function ResendEmail() {
               </div>
 
               <div className="text-center m-2">
-                <Image src="send-data.png" alt="send-data" fluid />
+                <Image src="/Assets/Images/send-data.png" alt="send-data" fluid />
               </div>
               <div className="m-2" style={{ fontSize: "1rem" }}>
                 {t("Insert_your_mail")}
@@ -137,4 +137,4 @@ function ResendEmail() {
   );
 }
 
-export default ResendEmail;
+export default EmailVerificationNewAccountResendEmailPage;

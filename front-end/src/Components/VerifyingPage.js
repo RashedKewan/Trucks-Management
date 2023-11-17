@@ -86,7 +86,6 @@ const VerifyingPage = ({navigateToPage, requestTo}) => {
 
           // Navigate to the verification success page on successful verification
           if (res.data.status === Verification_STATUS.SUCCESS) {
-            // navigateTo(ROUTE_PATHS.VERIFICATION_SUCCESS, {state:{email: res.data.email}});
             navigateTo(navigateToPage, {state:{email: res.data.email}});
           }
         }
@@ -95,10 +94,10 @@ const VerifyingPage = ({navigateToPage, requestTo}) => {
         if (!err?.response) {
         } else if (err.response?.data === ERROR_CODES.VERIFICATION_FAILED) {
           // VerificationFailed: Navigate to the verification failed page
-          navigateTo(ROUTE_PATHS.VERIFICATION_FAILED);
+          navigateTo(ROUTE_PATHS.EmailVerificationFailedPage);
         } else if (err.response?.data === ERROR_CODES.ALREADY_VERIFIED) {
           // AlreadyVerified: Navigate to the already verified page
-          navigateTo(ROUTE_PATHS.VERIFICATION);
+          navigateTo(ROUTE_PATHS.EmailVerificationCompletePage);
         }
       }
     };

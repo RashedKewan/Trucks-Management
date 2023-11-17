@@ -16,6 +16,7 @@ import {
   REGEX,
   ROUTE_PATHS,
 } from "../../../../utils/Consts";
+import RegisterPage from "../Register/RegisterPage";
 
 const LoginForm = () => {
   /**************************** CONSTS *******************************/
@@ -153,7 +154,7 @@ const LoginForm = () => {
       });
 
       // Redirect to the dashboard page on successful login
-      navigateTo(ROUTE_PATHS.DASHBOARD);
+      navigateTo(ROUTE_PATHS.Home);
     } catch (err) {
       // Handle different error scenarios
       if (!err?.response) {
@@ -225,8 +226,8 @@ const LoginForm = () => {
 
             <p className="mt-2">
               {t("Forgot")}{" "}
-              <a href={ROUTE_PATHS.RESET_PASSWORD_REQUEST}>{t("Password")}? </a>
-              <Link to={ROUTE_PATHS.REGISTER}>{t("Sign_Up")}</Link>
+              <a href={ROUTE_PATHS.ResetPasswordRequestPage}>{t("Password")}? </a>
+              <Link to={ROUTE_PATHS.RegisterPage}>{t("Sign_Up")}</Link>
             </p>
           </section>
         </form>

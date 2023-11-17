@@ -14,7 +14,7 @@ import {
   ROUTE_PATHS,
 } from "../../../../utils/Consts";
 
-const Register = () => {
+const RegisterForm = () => {
   /**************************** CONSTS *******************************/
   const username = useInput("", REGEX.USERNAME);
   const password = useInput("", REGEX.PASSWORD);
@@ -107,9 +107,7 @@ const Register = () => {
       const response = await axios.post(API_ENDPOINTS.REGISTER, user);
 
       // Navigate to the registration success page with the email in the state
-      navigateTo(ROUTE_PATHS.REGISTER_SUCCESS, {
-        state: { email: email.value },
-      });
+      navigateTo(ROUTE_PATHS.RegisterSuccessPage ,{state:{email:email.value, accessible: true}});
     } catch (err) {
       // Handle different error cases
       if (!err?.response) {
@@ -250,7 +248,7 @@ const Register = () => {
             <p className="m-2">
               {t("Already_Registered")}?{" "}
               <span className="line">
-                <Link to={ROUTE_PATHS.LOGIN}>{t("Login")}</Link>
+                <Link to={ROUTE_PATHS.LoginPage}>{t("Login")}</Link>
               </span>
             </p>
           </section>
@@ -260,4 +258,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterForm;

@@ -15,12 +15,17 @@
     "Password": "كلمة المرور",
     "Confirm_Password": "تأكيد كلمة المرور",
     "Reset_Password": "إعادة ضبط كلمة المرور",
+    "New_Password": "كلمة المرور الجديدة",
+    "Confirm_New_Password": "تأكيد كلمة المرور الجديدة",
     "Forgot": "نسيت",
     "Already_Registered": "مسجل بالفعل",
     "Back_to_Home": "العودة إلى الصفحة الرئيسية",
 
 
     "Send":"ارسل",
+    "Resend_Email": "إعادة إرسال البريد الإلكتروني",
+    "Resend_your_mail": "إعادة إرسال البريد الإلكتروني للتحقق",
+    "Insert_your_mail": "الرجاء إدخال بريدك الإلكتروني:",
 
     "instructionMessages.Invalid_Username":"اسم المستخدم غير صالح",
     "instructionMessages.Invalid_Password":"كلمة المرور غير صالحة",
@@ -40,8 +45,42 @@
     "No_Server_Response": "لا توجد استجابة من الخادم",
     "Account_Not_Enabled":"الحساب غير مفعل",
     "EMAIL_FAILED_TO_SEND":"فشل إرسال البريد الإلكتروني",
+    "Email_Sent_Successfully": "تم إرسال البريد الإلكتروني بنجاح",
     "Wrong_Credentials": "بيانات الاعتماد غير صحيحة",
     "Verified_Successfully": "تم التحقق بنجاح",
     "Account_Already_Verified": "الحساب تم تحققه بالفعل",
-    "Logout_Successful": "تم تسجيل الخروج بنجاح"
+    "Logout_Successful": "تم تسجيل الخروج بنجاح",
+
+
+    
+    "Close_window_needed_error":"عفوًا، حدث خطأ ما، يرجى إغلاق النافذة وفتحها مرة أخرى من البريد الإلكتروني",
+ 
+    
+    "Authentication_failed": "فشلت المصادقة",
+    "Account_Cannot_Be_Verified": "لا يمكن التحقق من الحساب في الوقت الحالي.",
+    "link_Is_Not_Available":"الرابط غير متوفر",
+    "Please_Resend_The_Email_To_Complete_The_Verification": "يرجى إعادة إرسال البريد الإلكتروني لإكمال عملية التحقق.",
+    "If_You_Have_Questions_Or_Cant_Find_The_Email_Well_Be_Happy_To_Help":"إذا كانت لديك أسئلة أو لم تتمكن من العثور على البريد الإلكتروني، سنكون سعداء بتقديم المساعدة.",
+    "An_Email_Has_Been_Sent_To_Your_Email_Address_Please_Check_It_Out_To_Verify_Your_Account":"لقد تم إرسال رسالة بريد إلكتروني إلى عنوان بريدك الإلكتروني. يُرجى التحقق منه للتحقق من حسابك.",
+    "Account_Created_Successfully": "تم إنشاء الحساب بنجاح!",
+
+    "Our_Company":" شركتنا",
+    "Thank_You_For_Choosing": "شكرًا لك على اختيار",
+    "Account_Is_Already_Verified": "تم بالفعل التحقق من حسابك وجاهز للاستخدام",
+    "We_Will_Be_Happy_To_Help": "سنكون سعداء بمساعدتك إذا كانت لديك أية أسئلة أو طلبات إضافية.",
+    "Best_Regards": "مع أطيب التحيات",
+    "Company_Staff": "طاقم الشركة",
+
+    "Password_reset_request_successfully_received":"تم استلام طلب إعادة ضبط كلمة المرور بنجاح!",
+    "A_password_reset_email_has_been_sent_to_your_email_address_Please_check_your_email_to_proceed_with_the_password_reset":"تم إرسال بريد إلكتروني لإعادة تعيين كلمة المرور إلى عنوان بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني لمتابعة إعادة تعيين كلمة المرور.",
+    
+    "User_Verification":"التحقق من المستخدم",
+    "Your_Account": "من حسابك",
+    "Successfully_verified":"تم التحقق بنجاح",
+    "You_are_now_ready_to_enjoy_all_the_benefits_of_our_services":"أنت الآن جاهز للاستمتاع بجميع مزايا خدماتنا.",
+    "Feel_free_to_explore_the_site_and_contact_us_if_you_have_any_questions":"لا تتردد في استكشاف الموقع والاتصال بنا إذا كانت لديك أية أسئلة."
+
+
+
+
 }

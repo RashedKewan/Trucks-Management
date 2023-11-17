@@ -15,12 +15,18 @@
     "Password":"Password",
     "Confirm_Password":"Confirm Password",
     "Reset_Password":"Reset Password",
+    "New_Password":"New Password",
+    "Confirm_New_Password":"Confirm New Password",
+
     "Forgot":"Forgot",
     "Already_Registered":"Already Registered",
     "Back_to_Home": "Back to Home",
     
 
     "Send":"Send",
+    "Resend_Email": "Resend Email",
+    "Resend_your_mail": "Resend email for verification",
+    "Insert_your_mail": "Please enter your email:",
 
     "instructionMessages.Invalid_Username":"Invalid Username",
     "instructionMessages.Invalid_Password":"Invalid Password",
@@ -39,9 +45,46 @@
     "Username_Taken":"Username Taken",
     "No_Server_Response":"No Server Response",
     "EMAIL_FAILED_TO_SEND":"Email Failed To Send",
+    "Email_Sent_Successfully":"Email Sent Successfully",
     "Account_Not_Enabled":"Account Not Enabled",
     "Wrong_Credentials":"Wrong Credentials",
     "Verified_Successfully":"Verified Successfully",
     "Account_Already_Verified":"Account Already Verified",
-    "Logout_Successful":"Logout Successful"
+    "Logout_Successful":"Logout Successful",
+
+    "Close_window_needed_error":"Oops, something went wrong, please close the window and open it again from the email",
+    
+    "Authentication_failed": "Authentication failed",
+    "Account_Cannot_Be_Verified":"The account cannot be verified at this time. ",
+    "link_Is_Not_Available":"The link is not available",
+    "Please_Resend_The_Email_To_Complete_The_Verification":"Please resend the email to complete the verification.",
+    "If_You_Have_Questions_Or_Cant_Find_The_Email_Well_Be_Happy_To_Help":"If you have questions or can't find the email, we'll be happy to help.",
+
+    "An_Email_Has_Been_Sent_To_Your_Email_Address_Please_Check_It_Out_To_Verify_Your_Account":"An email has been sent to your email address. Please check it out to verify your account.",
+    "Account_Created_Successfully":"Account Created Successfully!",
+
+
+
+    "Our_Company":" Our Company",
+    "Thank_You_For_Choosing": "Thank you for choosing",
+    "Account_Is_Already_Verified": "Your account is already verified and ready to use.",
+    "We_Will_Be_Happy_To_Help": "We will be happy to help if you have any additional questions or requests.",
+    "Best_Regards": "Best regards",
+    "Company_Staff": "Company staff",
+    
+
+    "Password_reset_request_successfully_received":"Password reset request successfully received!",
+    "A_password_reset_email_has_been_sent_to_your_email_address_Please_check_your_email_to_proceed_with_the_password_reset":"A password reset email has been sent to your email address. Please check your email to proceed with the password reset.",
+    
+    "User_Verification":"User Verification",
+    "Your_Account":"Your Account",
+    "Successfully_verified":"Successfully verified",
+    "You_are_now_ready_to_enjoy_all_the_benefits_of_our_services":"You are now ready to enjoy all the benefits of our services.",
+    "Feel_free_to_explore_the_site_and_contact_us_if_you_have_any_questions":"Feel free to explore the site and contact us if you have any questions."
+
+      
+
+
+
+
 }

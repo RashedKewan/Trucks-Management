@@ -26,7 +26,7 @@ const Dashboard = () => {
       });
       cookie.remove("Bearer");
       console.log(res);
-      navigateTo(ROUTE_PATHS.LOGIN, {state:{logout:true}});
+      navigateTo(ROUTE_PATHS.LoginPage, {state:{logout:true}});
     } catch (err) {}
   };
 

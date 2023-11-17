@@ -1,8 +1,9 @@
 import React from "react";
-import svg from "../../../../Assets/404.svg";
+// import svg from "../../../../../public/Assets/Images/404.svg";
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from "react-i18next";
+import { Image } from "react-bootstrap";
 /**
  * @component PageNotFound
  * @description
@@ -23,14 +24,14 @@ import { useTranslation } from "react-i18next";
  *      - Link: React Router Link component wrapping the navigation button.
  *        - Button: Bootstrap Button component linking back to the home page.
  */
-const PageNotFound = () => {
+const NotFoundPage = () => {
   const { t } = useTranslation();
 
   return (
     <article>
       {/* Display the error image centered */}
       <div className="d-flex justify-content-center">
-        <img src={svg} alt="svg" height="500" />
+        <img src="/Assets/Images/404.svg" alt="svg" height="500" />
       </div>
       
       {/* Display the navigation button centered */}
@@ -44,4 +45,4 @@ const PageNotFound = () => {
   );
 };
 
-export default PageNotFound;
+export default NotFoundPage;

@@ -2,35 +2,37 @@ import React from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATHS } from '../../../../utils/Consts';
+import { useTranslation } from "react-i18next";
 
-const AlreadyVerified = () => {
-  const navigate = useNavigate();
 
+const EmailVerificationCompletePage = () => {
+  const navigateTo = useNavigate();
+  const {t} = useTranslation();
   const handleReturnHome = () => {
     // Redirect to the home page when the button is clicked
-    navigate(ROUTE_PATHS.LOGIN);
+    navigateTo(ROUTE_PATHS.LoginPage);
   };
 
   return (
     <Container className="mt-5">
       <Card className="text-center">
         <Card.Body>
-          <Card.Title as="h2" style={{ color: '#4285f4' }}>חשבון מאומת כבר</Card.Title>
+          <Card.Title as="h2" style={{ color: '#4285f4' }}>{t("Account_Already_Verified")}</Card.Title>
           <Card.Text>
-            תודה על שבחרת <b>בחברה</b>.
+            {t("Thank_You_For_Choosing")}<b>{t("Our_Company")}</b>.
           </Card.Text>
           <Card.Text>
-            החשבון שלך כבר אומת ומוכן לשימוש.
+          {t("Account_Is_Already_Verified")}
           </Card.Text>
           <Card.Text>
-            נשמח לעזור אם יש לך שאלות או בקשות נוספות.
+          {t("We_Will_Be_Happy_To_Help")}
           </Card.Text>
           <Button variant="info" onClick={handleReturnHome} className="mt-3">
-            חזור לדף הבית
+            {t("Back_to_Home")}
           </Button>
           <Card.Text className="mt-3">
-            בברכה,<br />
-            צוות החברה
+          {t("Best_Regards")},<br />
+          {t("Company_Staff")}
           </Card.Text>
         </Card.Body>
       </Card>
@@ -38,4 +40,4 @@ const AlreadyVerified = () => {
   );
 };
 
-export default AlreadyVerified;
+export default EmailVerificationCompletePage;

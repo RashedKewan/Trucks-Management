@@ -46,7 +46,7 @@ const InputField = ({
           </label>
         ):undefined}
       </div>
-      {allowInstructionMessages ?(
+      {allowInstructionMessages && focus && !valid && value?(
         <p
           style={{ width: "90%" }}
           id={`${label}note`}

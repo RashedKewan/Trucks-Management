@@ -44,7 +44,6 @@ const LanguageTransform = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    console.log("Setting page stuff");
     document.body.dir = currentLanguage.dir || "ltr";
   }, [currentLanguage, t]);
 

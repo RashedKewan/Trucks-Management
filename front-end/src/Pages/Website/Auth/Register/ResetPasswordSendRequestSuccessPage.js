@@ -1,4 +1,3 @@
-// PasswordResetRequestSuccess.js
 import { Container, Row, Col, Alert, Button, Image } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,19 +10,25 @@ import {
 } from "../../../../utils/Consts";
 import Loading from "../../../../Components/Loading";
 
-const PasswordResetRequestSuccessPage = () => {
+import { useTranslation } from "react-i18next";
+const ResetPasswordSendRequestSuccessPage = () => {
+  /**************************** CONSTS *******************************/
+  const { t } = useTranslation();
   const navigateTo = useNavigate();
   const location = useLocation();
+
+  const [counter, setCounter] = useState(TIME_TO_RESEND_EMAIL_AGAIN / 1000);
+  const [showResendButton, setShowResendButton] = useState(false);
   const [isAccessible, setIsAccessible] = useState(
     location.state && location.state.accessible
   );
-  if (isAccessible === null) {
-    navigateTo(ROUTE_PATHS.RESET_PASSWORD_REQUEST);
-  }
-  /**************************** CONSTS *******************************/
-  const [showResendButton, setShowResendButton] = useState(false);
 
   /**************************** FUNCTIONS *******************************/
+
+  if (isAccessible === null) {
+    navigateTo(ROUTE_PATHS.ResetPasswordRequestPage);
+  }
+
   /**
    * Initial timer for the re-send email button
    * @return: Cleanup the timeout to avoid memory leaks
@@ -35,11 +40,24 @@ const PasswordResetRequestSuccessPage = () => {
     return () => clearTimeout(timeoutId);
   }, []);
 
+  useEffect(() => {
+    if (counter > 0) {
+      // Update the screen each time the counter changes
+      const timerId = setTimeout(() => {
+        setCounter((prevCounter) => prevCounter - 1);
+      }, 1000);
+
+      // Clear the timeout when the component unmounts or when counter reaches 0
+      return () => clearTimeout(timerId);
+    }
+  }, [counter]); // Dependency on counter ensures this effect runs when counter changes
+
   /**
-   * Disabling re-send email button for 'TIME_TO_RESEND_EMAIL_AGAIN'
+   * Disabling re-send eamil button for 'TIME_TO_RESEND_EMAIL_AGAIN'
    * @return: Cleanup the timeout to avoid memory leaks
    */
   async function timer() {
+    setCounter(TIME_TO_RESEND_EMAIL_AGAIN / 1000);
     const timeoutId = setTimeout(() => {
       setShowResendButton(true);
     }, TIME_TO_RESEND_EMAIL_AGAIN);
@@ -85,25 +103,33 @@ const PasswordResetRequestSuccessPage = () => {
             <Col xs={12} md={6}>
               <Alert variant="success">
                 <div className="text-center m-2">
-                  <Alert.Heading>בקשת איפוס סיסמה התקבלה בהצלחה!</Alert.Heading>
-                  <Image src="reset-password.png" alt="reset-password" fluid />
+                  <Alert.Heading>
+                    {t("Password_reset_request_successfully_received")}
+                  </Alert.Heading>
+                  <Image
+                    src="/Assets/Images/send-data.png"
+                    alt="reset-password"
+                    fluid
+                  />
                 </div>
                 <p>
-                  אימייל לאיפוס סיסמה נשלח לכתובת האימייל שלך. בבקשה לבדוק את
-                  האימייל שלך כדי להמשיך עם איפוס הסיסמה.
+                  {t(
+                    "A_password_reset_email_has_been_sent_to_your_email_address_Please_check_your_email_to_proceed_with_the_password_reset"
+                  )}
                 </p>
               </Alert>
-              {showResendButton && (
+              {
                 <div className="text-center">
                   <Button
                     disabled={showResendButton === true ? false : true}
                     variant="primary"
                     onClick={resendEmail}
                   >
-                    שלח אימייל מחדש
+                    {t("Resend_Email")}
                   </Button>
+                  {showResendButton === false && <div>{counter}</div>}
                 </div>
-              )}
+              }
             </Col>
           </Row>
         </Container>
@@ -112,7 +138,6 @@ const PasswordResetRequestSuccessPage = () => {
       )}
     </>
   );
-  
 };
 
-export default PasswordResetRequestSuccessPage;
+export default ResetPasswordSendRequestSuccessPage;

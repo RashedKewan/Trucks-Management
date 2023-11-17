@@ -14,18 +14,18 @@ public class EmailUtils {
 		String api = "";
 		switch (emailTemplate) {
 		case EmailServiceImpl.NEW_ACCOUNT_EMAIL_TEMPLATE: {
-			api = "/new-account-email-verifying";
+			api = "/verify-email-new-account";
 			break;
 
 		}
 
 		case EmailServiceImpl.RESET_PASSWORD_EMAIL_TEMPLATE: {
-			api = "/reset-password-email-verifying";
+			api = "/verify-email-reset-password";
 			break;
 		}
 
 		default:
-			api = "/new-account-email-verifying";
+			api = "/verify-email-new-account";
 			break;
 		}
 		return host + api + tokenParam;

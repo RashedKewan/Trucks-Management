@@ -15,12 +15,15 @@
     "Password": "סיסמה",
     "Confirm_Password": "אשר סיסמה",
     "Reset_Password": "איפוס סיסמה",
+    "New_Password": "סיסמה חדשה",
+    "Confirm_New_Password": "אשר סיסמה חדשה",
     "Forgot": "שכחת",
     "Already_Registered": "כבר רשום",
     "Back_to_Home": "חזרה לדף הבית",
 
     "Send":"שלח",
-   "Resend_your_mail": "שלח מייל מחדש לאימות",
+    "Resend_Email": "שלח דוא\"ל מחדש",
+    "Resend_your_mail": "שלח מייל מחדש לאימות",
     "Insert_your_mail": "אנא הזן/י את האימייל שלך:",
     
       
@@ -41,9 +44,42 @@
     "Username_Taken":"שם המשתמש תפוס",
     "No_Server_Response":"אין תגובה מהשרת",
     "EMAIL_FAILED_TO_SEND":"שליחת האימייל נכשלה",
+    "Email_Sent_Successfully": "דוא\"ל נשלח בהצלחה",
     "Account_Not_Enabled":"החשבון לא מופעל",
     "Wrong_Credentials": "פרטי התחברות שגויים",
     "Verified_Successfully": "אומת בהצלחה",
     "Account_Already_Verified": "החשבון כבר אומת",
-    "Logout_Successful": "יציאה מוצלחת"
+    "Logout_Successful": "יציאה מוצלחת",
+
+    
+    "Close_window_needed_error":"אופס, משהו השתבש, נא לסגור את החלון ולפתוח אותו שוב מהמייל",
+
+
+    "Authentication_failed":"אימות נכשל",
+    "Account_Cannot_Be_Verified":"לא ניתן לאמת את החשבון כרגע. ",
+    "link_Is_Not_Available":"הקישור אינו זמין",
+    "Please_Resend_The_Email_To_Complete_The_Verification":"אנא שלח/י שוב את האימייל כדי להשלים את האימות.",
+    "If_You_Have_Questions_Or_Cant_Find_The_Email_Well_Be_Happy_To_Help":"אם יש לך שאלות או אינך מוצא את האימייל, נשמח לעזור.",
+    "An_Email_Has_Been_Sent_To_Your_Email_Address_Please_Check_It_Out_To_Verify_Your_Account":"אימייל נשלח לכתובת הדוא\"ל שלך. אנא בדוק אותו כדי לאמת את חשבונך.",
+    "Account_Created_Successfully": "החשבון נוצר בהצלחה!",
+
+
+
+    "Our_Company":" בחברה",
+    "Thank_You_For_Choosing": "תודה שבחרת",
+    "Account_Is_Already_Verified": "החשבון שלך כבר מאומת ומוכן לשימוש.",
+    "We_Will_Be_Happy_To_Help": "נשמח לעזור אם יש לך שאלות או בקשות נוספות.",
+    "Best_Regards":"בברכה",
+    "Company_Staff": "צוות החברה",
+
+    "Password_reset_request_successfully_received":"בקשת איפוס סיסמה התקבלה בהצלחה!",
+    "A_password_reset_email_has_been_sent_to_your_email_address_Please_check_your_email_to_proceed_with_the_password_reset":"אימייל לאיפוס סיסמה נשלח לכתובת המייל שלך. בבקשה לבדוק את האימייל שלך כדי להמשיך עם איפוס הסיסמה.",
+    
+
+    "User_Verification":"זיהויי משתמש",
+    "Your_Account": "החשבון שלך",
+    "Successfully_verified":"אומת בהצלחה",
+    "You_are_now_ready_to_enjoy_all_the_benefits_of_our_services":"אתה מוכן כעת ליהנות מכל היתרונות של השירותים שלנו.",
+    "Feel_free_to_explore_the_site_and_contact_us_if_you_have_any_questions":"אתה מוזמן לחקור את האתר וליצור איתנו קשר אם יש לך שאלות כלשהן."
+
 }

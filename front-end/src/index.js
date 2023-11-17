@@ -1,17 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./Assets/style.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import "./style.css";
+
 import UserProvider from "./Pages/Website/Context/UserContext";
 import "@fortawesome/fontawesome-free/css/all.min.css"; 
-import 'bootstrap/dist/js/bootstrap.js'
+import "mdb-react-ui-kit/dist/css/mdb.rtl.min.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import i18next from 'i18next'
+import 'bootstrap/dist/js/bootstrap.js'
+
+import reportWebVitals from "./reportWebVitals";
+
+import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 import HttpApi from 'i18next-http-backend'
-import LanguageDetector from 'i18next-browser-languagedetector'
-import "mdb-react-ui-kit/dist/css/mdb.rtl.min.css";
+import i18next from 'i18next'
 
 i18next
   .use(HttpApi)
@@ -28,7 +31,7 @@ i18next
     },
     react: { useSuspense: true },
     backend: {
-      loadPath: '/locales/{{lng}}/translation.json',
+      loadPath: '/Assets/locales/{{lng}}/translation.json',
     },
   })
 

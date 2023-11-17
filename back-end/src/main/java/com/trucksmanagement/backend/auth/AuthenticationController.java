@@ -65,6 +65,11 @@ public class AuthenticationController {
 		authenticationService.refreshToken(request, response);
 	}
 
+	/**
+	 * 
+	 * This API for sending reset password email request in order to verify
+	 * the user who wants to perform the password's reset.
+	 */
 	@PostMapping("/reset-password-request")
 	public ResponseEntity<?> resetPasswordRequest(@RequestBody SendEmailRequest request) {
 		try {
@@ -78,6 +83,9 @@ public class AuthenticationController {
 		}
 	}
 	/**
+	 * 
+	 * This API for updating user's password
+	 * 
 	 * @PatchMapping annotation is used to handle HTTP PATCH requests. The PATCH
 	 *               method is typically used for partial updates to a resource.
 	 *               Unlike PUT, which is used to update the entire resource, PATCH

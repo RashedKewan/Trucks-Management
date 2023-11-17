@@ -1,5 +1,4 @@
 // ForgotPasswordPage.js
-import useFormInput from "../../../../Hooks/useFormInput";
 import InputField from "../../../../Components/InputField";
 import useInput from "../../../../Hooks/useFormInput";
 import { useTranslation } from "react-i18next";
@@ -9,7 +8,7 @@ import { useState } from "react";
 import { API_ENDPOINTS, ERROR_CODES, REGEX } from "../../../../utils/Consts";
 import { useLocation } from "react-router-dom";
 
-function ResetPassword() {
+function ResetPasswordPage() {
   /**************************** CONSTS *******************************/
   const username = useInput("", REGEX.USERNAME);
   const password = useInput("", REGEX.PASSWORD);
@@ -37,6 +36,10 @@ function ResetPassword() {
       }
       try {
         let email = location.state && location.state.email;
+        if(!email){
+          setErrMsg(t("Close_window_needed_error"))
+          return;
+        }
         let res = await axios.patch(API_ENDPOINTS.RESET_PASSWORD, {
           username: username.value,
           email: email,
@@ -75,12 +78,12 @@ function ResetPassword() {
               >
                 {successMsg}
               </p>
-              <div className="text-center m-2">
+              <div className="text-center ">
                 <h2 style={{ color: "#4285f4" }}>{t("Reset_Password")}</h2>
               </div>
 
-              <div className="text-center m-4 ">
-                <Image src="reset-password.png" alt="reset-password" fluid />
+              <div className="text-center mb-4 mt-1">
+                <Image src="/Assets/Images/reset-password.png" alt="reset-password" fluid />
               </div>
 
               <InputField
@@ -96,7 +99,7 @@ function ResetPassword() {
               />
               <InputField
                 type="password"
-                label={t("Password")}
+                label={t("New_Password")}
                 value={password.value}
                 onChange={password.handleChange}
                 valid={password.valid}
@@ -107,7 +110,7 @@ function ResetPassword() {
               />
               <InputField
                 type="password"
-                label={t("Confirm_Password")}
+                label={t("Confirm_New_Password")}
                 value={confirmPassword.value}
                 onChange={confirmPassword.handleChange}
                 valid={confirmPassword.valid}
@@ -138,4 +141,4 @@ function ResetPassword() {
   );
 }
 
-export default ResetPassword;
+export default ResetPasswordPage;
